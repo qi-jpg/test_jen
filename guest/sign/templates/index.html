@@ -1,0 +1,15 @@
+<html>
+<head>
+    <title>Django title</title>
+</head>
+<body>
+<h1>Django正文</h1>
+<form method="post" action="/login_action/">
+    <input name="username" type="text" placeholder="username">
+    <input name="password" type="password" placeholder="password">
+    {{ error }}
+    <button id="btn" type="submit">登录</button>
+    {% csrf_token %}
+</form>
+</body>
+</html>

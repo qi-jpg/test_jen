@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.0 (Python 3.7.4 on darwin)" generated="20200406 00:35:19.746">
+<suite id="s1" name="Test If" source="/Users/maimai/Desktop/projectzq/test1/guest/rftest/test_if.robot">
+<test id="s1-t1" name="test_get_event_list">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<arguments>
+<arg>eid=1</arg>
+</arguments>
+<assign>
+<var>${payload}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.867" level="INFO">${payload} = {'eid': '1'}</msg>
+<status status="PASS" starttime="20200406 00:35:19.867" endtime="20200406 00:35:19.867"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>event</arg>
+<arg>http://127.0.0.1:8000/api</arg>
+</arguments>
+<msg timestamp="20200406 00:35:19.868" level="INFO">Creating Session using : alias=event, url=http://127.0.0.1:8000/api, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200406 00:35:19.867" endtime="20200406 00:35:19.868"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>event</arg>
+<arg>/get_event_list/</arg>
+<arg>params=${payload}</arg>
+</arguments>
+<assign>
+<var>${r}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.868" level="INFO">GET Request using : uri=/get_event_list/, params={'eid': '1'}, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200406 00:35:19.885" level="INFO">${r} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200406 00:35:19.868" endtime="20200406 00:35:19.885"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${r.status_code}</arg>
+<arg>200</arg>
+</arguments>
+<msg timestamp="20200406 00:35:19.886" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200406 00:35:19.886" endtime="20200406 00:35:19.886"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${r.json()}</arg>
+</arguments>
+<msg timestamp="20200406 00:35:19.887" level="INFO">{'status': 200, 'message': 'success', 'data': {'name': '小白生日会', 'limit': 10, 'status': True, 'address': '望京', 'start_time': '2020-03-02T06:16:37'}}</msg>
+<status status="PASS" starttime="20200406 00:35:19.886" endtime="20200406 00:35:19.887"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${r.json()}</arg>
+</arguments>
+<assign>
+<var>${dict}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.887" level="INFO">${dict} = {'status': 200, 'message': 'success', 'data': {'name': '小白生日会', 'limit': 10, 'status': True, 'address': '望京', 'start_time': '2020-03-02T06:16:37'}}</msg>
+<status status="PASS" starttime="20200406 00:35:19.887" endtime="20200406 00:35:19.887"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${dict}</arg>
+<arg>message</arg>
+</arguments>
+<assign>
+<var>${msg}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.888" level="INFO">${msg} = success</msg>
+<status status="PASS" starttime="20200406 00:35:19.888" endtime="20200406 00:35:19.888"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${msg}</arg>
+<arg>success</arg>
+</arguments>
+<status status="PASS" starttime="20200406 00:35:19.888" endtime="20200406 00:35:19.888"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${dict}</arg>
+<arg>status</arg>
+</arguments>
+<assign>
+<var>${sta}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.889" level="INFO">${sta} = 200</msg>
+<status status="PASS" starttime="20200406 00:35:19.889" endtime="20200406 00:35:19.889"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>int(200)</arg>
+</arguments>
+<assign>
+<var>${status}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.893" level="INFO">${status} = 200</msg>
+<status status="PASS" starttime="20200406 00:35:19.889" endtime="20200406 00:35:19.893"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${sta}</arg>
+<arg>${status}</arg>
+</arguments>
+<status status="PASS" starttime="20200406 00:35:19.894" endtime="20200406 00:35:19.894"></status>
+</kw>
+<status status="PASS" starttime="20200406 00:35:19.866" endtime="20200406 00:35:19.894" critical="yes"></status>
+</test>
+<test id="s1-t2" name="test_user_sign_success">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>sign</arg>
+<arg>http://127.0.0.1:8000/api</arg>
+</arguments>
+<msg timestamp="20200406 00:35:19.896" level="INFO">Creating Session using : alias=sign, url=http://127.0.0.1:8000/api, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200406 00:35:19.895" endtime="20200406 00:35:19.898"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<arguments>
+<arg>Content-Type=application/x-www-form-urlencoded</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.899" level="INFO">&amp;{headers} = { Content-Type=application/x-www-form-urlencoded }</msg>
+<status status="PASS" starttime="20200406 00:35:19.899" endtime="20200406 00:35:19.899"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<arguments>
+<arg>eid=3</arg>
+<arg>phone=15227105153</arg>
+</arguments>
+<assign>
+<var>&amp;{payload}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.900" level="INFO">&amp;{payload} = { eid=3 | phone=15227105153 }</msg>
+<status status="PASS" starttime="20200406 00:35:19.900" endtime="20200406 00:35:19.900"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>sign</arg>
+<arg>/user_sign/</arg>
+<arg>data=${payload}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<assign>
+<var>${r}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.901" level="INFO">POST Request using : uri=/user_sign/, params=None, files=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/x-www-form-urlencoded'} 
+data=eid=3&amp;phone=15227105153 
+json=None</msg>
+<msg timestamp="20200406 00:35:19.911" level="INFO">${r} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200406 00:35:19.901" endtime="20200406 00:35:19.911"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${r.status_code}</arg>
+<arg>200</arg>
+</arguments>
+<msg timestamp="20200406 00:35:19.912" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200406 00:35:19.912" endtime="20200406 00:35:19.912"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${r.json()}</arg>
+</arguments>
+<msg timestamp="20200406 00:35:19.912" level="INFO">{'status': 10024, 'message': '发布会已结束'}</msg>
+<status status="PASS" starttime="20200406 00:35:19.912" endtime="20200406 00:35:19.912"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${r.json()}</arg>
+</arguments>
+<assign>
+<var>${dict}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.913" level="INFO">${dict} = {'status': 10024, 'message': '发布会已结束'}</msg>
+<status status="PASS" starttime="20200406 00:35:19.913" endtime="20200406 00:35:19.913"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${dict}</arg>
+<arg>message</arg>
+</arguments>
+<assign>
+<var>${msg}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.913" level="INFO">${msg} = 发布会已结束</msg>
+<status status="PASS" starttime="20200406 00:35:19.913" endtime="20200406 00:35:19.913"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${msg}</arg>
+<arg>sign success</arg>
+</arguments>
+<msg timestamp="20200406 00:35:19.914" level="FAIL">发布会已结束 != sign success</msg>
+<status status="FAIL" starttime="20200406 00:35:19.913" endtime="20200406 00:35:19.914"></status>
+</kw>
+<status status="FAIL" starttime="20200406 00:35:19.894" endtime="20200406 00:35:19.914" critical="yes">发布会已结束 != sign success</status>
+</test>
+<test id="s1-t3" name="test_add_event">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>event</arg>
+<arg>http://127.0.0.1:8000/api</arg>
+</arguments>
+<msg timestamp="20200406 00:35:19.915" level="INFO">Creating Session using : alias=event, url=http://127.0.0.1:8000/api, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200406 00:35:19.915" endtime="20200406 00:35:19.915"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<arguments>
+<arg>Content-Type=application/x-www-form-urlencoded</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.917" level="INFO">&amp;{headers} = { Content-Type=application/x-www-form-urlencoded }</msg>
+<status status="PASS" starttime="20200406 00:35:19.916" endtime="20200406 00:35:19.918"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<arguments>
+<arg>eid=6</arg>
+<arg>name=robot</arg>
+<arg>limit=123</arg>
+<arg>status=1</arg>
+<arg>address=chaoyang</arg>
+<arg>start_time=2020-04-05 12:00:00</arg>
+</arguments>
+<assign>
+<var>&amp;{payload}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.920" level="INFO">&amp;{payload} = { eid=6 | name=robot | limit=123 | status=1 | address=chaoyang | start_time=2020-04-05 12:00:00 }</msg>
+<status status="PASS" starttime="20200406 00:35:19.919" endtime="20200406 00:35:19.920"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>event</arg>
+<arg>/add_event/</arg>
+<arg>data=${payload}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<assign>
+<var>${r}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.920" level="INFO">POST Request using : uri=/add_event/, params=None, files=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/x-www-form-urlencoded'} 
+data=eid=6&amp;name=robot&amp;limit=123&amp;status=1&amp;address=chaoyang&amp;start_time=2020-04-05+12%3A00%3A00 
+json=None</msg>
+<msg timestamp="20200406 00:35:19.935" level="INFO">${r} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200406 00:35:19.920" endtime="20200406 00:35:19.935"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${r.status_code}</arg>
+<arg>200</arg>
+</arguments>
+<msg timestamp="20200406 00:35:19.936" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200406 00:35:19.935" endtime="20200406 00:35:19.936"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${r.json()}</arg>
+</arguments>
+<msg timestamp="20200406 00:35:19.936" level="INFO">{'status': 10022, 'message': '发布会ID已存在'}</msg>
+<status status="PASS" starttime="20200406 00:35:19.936" endtime="20200406 00:35:19.936"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${r.json()}</arg>
+</arguments>
+<assign>
+<var>${dict}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.937" level="INFO">${dict} = {'status': 10022, 'message': '发布会ID已存在'}</msg>
+<status status="PASS" starttime="20200406 00:35:19.936" endtime="20200406 00:35:19.937"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${dict}</arg>
+<arg>message</arg>
+</arguments>
+<assign>
+<var>${msg}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.938" level="INFO">${msg} = 发布会ID已存在</msg>
+<status status="PASS" starttime="20200406 00:35:19.937" endtime="20200406 00:35:19.938"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${msg}</arg>
+<arg>添加成功</arg>
+</arguments>
+<msg timestamp="20200406 00:35:19.941" level="FAIL">发布会ID已存在 != 添加成功</msg>
+<status status="FAIL" starttime="20200406 00:35:19.940" endtime="20200406 00:35:19.942"></status>
+</kw>
+<status status="FAIL" starttime="20200406 00:35:19.914" endtime="20200406 00:35:19.942" critical="yes">发布会ID已存在 != 添加成功</status>
+</test>
+<test id="s1-t4" name="test_get_guest_list">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>guest</arg>
+<arg>http://127.0.0.1:8000/api</arg>
+</arguments>
+<msg timestamp="20200406 00:35:19.944" level="INFO">Creating Session using : alias=guest, url=http://127.0.0.1:8000/api, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200406 00:35:19.943" endtime="20200406 00:35:19.944"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<arguments>
+<arg>eid=3</arg>
+<arg>phone=15227105153</arg>
+</arguments>
+<assign>
+<var>${payload}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.945" level="INFO">${payload} = {'eid': '3', 'phone': '15227105153'}</msg>
+<status status="PASS" starttime="20200406 00:35:19.945" endtime="20200406 00:35:19.945"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>guest</arg>
+<arg>/get_guest_list/</arg>
+<arg>params=${payload}</arg>
+</arguments>
+<assign>
+<var>${r}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.945" level="INFO">GET Request using : uri=/get_guest_list/, params={'eid': '3', 'phone': '15227105153'}, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+data=None 
+json=None</msg>
+<msg timestamp="20200406 00:35:19.955" level="INFO">${r} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200406 00:35:19.945" endtime="20200406 00:35:19.955"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${r.status_code}</arg>
+<arg>200</arg>
+</arguments>
+<msg timestamp="20200406 00:35:19.955" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200406 00:35:19.955" endtime="20200406 00:35:19.955"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${r.json()}</arg>
+</arguments>
+<msg timestamp="20200406 00:35:19.956" level="INFO">{'status': 200, 'message': 'success', 'data': {'realname': 'maimai', 'phone': '15227105153', 'email': '15227105153@163.com', 'sign': True}}</msg>
+<status status="PASS" starttime="20200406 00:35:19.955" endtime="20200406 00:35:19.956"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${r.json()}</arg>
+</arguments>
+<assign>
+<var>${dict}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.956" level="INFO">${dict} = {'status': 200, 'message': 'success', 'data': {'realname': 'maimai', 'phone': '15227105153', 'email': '15227105153@163.com', 'sign': True}}</msg>
+<status status="PASS" starttime="20200406 00:35:19.956" endtime="20200406 00:35:19.956"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${dict}</arg>
+<arg>message</arg>
+</arguments>
+<assign>
+<var>${msg}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.957" level="INFO">${msg} = success</msg>
+<status status="PASS" starttime="20200406 00:35:19.956" endtime="20200406 00:35:19.957"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${msg}</arg>
+<arg>success</arg>
+</arguments>
+<status status="PASS" starttime="20200406 00:35:19.957" endtime="20200406 00:35:19.958"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${dict}</arg>
+<arg>status</arg>
+</arguments>
+<assign>
+<var>${sta}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.959" level="INFO">${sta} = 200</msg>
+<status status="PASS" starttime="20200406 00:35:19.958" endtime="20200406 00:35:19.959"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>int(200)</arg>
+</arguments>
+<assign>
+<var>${status}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.960" level="INFO">${status} = 200</msg>
+<status status="PASS" starttime="20200406 00:35:19.960" endtime="20200406 00:35:19.960"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${sta}</arg>
+<arg>${status}</arg>
+</arguments>
+<status status="PASS" starttime="20200406 00:35:19.961" endtime="20200406 00:35:19.961"></status>
+</kw>
+<status status="PASS" starttime="20200406 00:35:19.943" endtime="20200406 00:35:19.961" critical="yes"></status>
+</test>
+<test id="s1-t5" name="test_add_guest">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>guest</arg>
+<arg>http://127.0.0.1:8000/api</arg>
+</arguments>
+<msg timestamp="20200406 00:35:19.962" level="INFO">Creating Session using : alias=guest, url=http://127.0.0.1:8000/api, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200406 00:35:19.962" endtime="20200406 00:35:19.962"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<arguments>
+<arg>Content-Type=application/x-www-form-urlencoded</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.962" level="INFO">&amp;{headers} = { Content-Type=application/x-www-form-urlencoded }</msg>
+<status status="PASS" starttime="20200406 00:35:19.962" endtime="20200406 00:35:19.962"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<arguments>
+<arg>eid=7</arg>
+<arg>realname=robotname</arg>
+<arg>phone=123311</arg>
+<arg>email=1123@123.com</arg>
+</arguments>
+<assign>
+<var>&amp;{payload}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.963" level="INFO">&amp;{payload} = { eid=7 | realname=robotname | phone=123311 | email=1123@123.com }</msg>
+<status status="PASS" starttime="20200406 00:35:19.962" endtime="20200406 00:35:19.963"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>event</arg>
+<arg>/add_guest/</arg>
+<arg>data=${payload}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<assign>
+<var>${r}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.963" level="INFO">POST Request using : uri=/add_guest/, params=None, files=None, allow_redirects=True, timeout=None
+headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/x-www-form-urlencoded'} 
+data=eid=7&amp;realname=robotname&amp;phone=123311&amp;email=1123%40123.com 
+json=None</msg>
+<msg timestamp="20200406 00:35:19.978" level="INFO">${r} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200406 00:35:19.963" endtime="20200406 00:35:19.978"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${r.status_code}</arg>
+<arg>200</arg>
+</arguments>
+<msg timestamp="20200406 00:35:19.979" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200406 00:35:19.978" endtime="20200406 00:35:19.979"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${r.json()}</arg>
+</arguments>
+<msg timestamp="20200406 00:35:19.980" level="INFO">{'status': 200, 'message': 'success add'}</msg>
+<status status="PASS" starttime="20200406 00:35:19.979" endtime="20200406 00:35:19.980"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${r.json()}</arg>
+</arguments>
+<assign>
+<var>${dict}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.981" level="INFO">${dict} = {'status': 200, 'message': 'success add'}</msg>
+<status status="PASS" starttime="20200406 00:35:19.980" endtime="20200406 00:35:19.981"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${dict}</arg>
+<arg>message</arg>
+</arguments>
+<assign>
+<var>${msg}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.982" level="INFO">${msg} = success add</msg>
+<status status="PASS" starttime="20200406 00:35:19.981" endtime="20200406 00:35:19.982"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${msg}</arg>
+<arg>success add</arg>
+</arguments>
+<status status="PASS" starttime="20200406 00:35:19.982" endtime="20200406 00:35:19.982"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${dict}</arg>
+<arg>status</arg>
+</arguments>
+<assign>
+<var>${sta}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.983" level="INFO">${sta} = 200</msg>
+<status status="PASS" starttime="20200406 00:35:19.982" endtime="20200406 00:35:19.983"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>int(200)</arg>
+</arguments>
+<assign>
+<var>${status}</var>
+</assign>
+<msg timestamp="20200406 00:35:19.983" level="INFO">${status} = 200</msg>
+<status status="PASS" starttime="20200406 00:35:19.983" endtime="20200406 00:35:19.983"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${sta}</arg>
+<arg>${status}</arg>
+</arguments>
+<status status="PASS" starttime="20200406 00:35:19.984" endtime="20200406 00:35:19.984"></status>
+</kw>
+<status status="PASS" starttime="20200406 00:35:19.961" endtime="20200406 00:35:19.984" critical="yes"></status>
+</test>
+<status status="FAIL" starttime="20200406 00:35:19.752" endtime="20200406 00:35:19.984"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="2">Critical Tests</stat>
+<stat pass="3" fail="2">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="3" fail="2" id="s1" name="Test If">Test If</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
