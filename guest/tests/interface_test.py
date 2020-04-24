@@ -1,7 +1,7 @@
 #-*-coding: utf-8 -*- 
 
-import $(URL_PYTHON)/requests
-import $(URL_PYTHON)/unittest
+import /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/requests
+import /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/unittest
 
 class GetEventListTest(unittest.TestCase):
     '''查询发布会接口'''
