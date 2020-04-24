@@ -1,7 +1,9 @@
 #-*-coding: utf-8 -*- 
 
-import /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/requests
-import /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/unittest
+import sys
+sys.path.append("/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages")
+import requests
+import unittest
 
 class GetEventListTest(unittest.TestCase):
     '''查询发布会接口'''
