@@ -1,7 +1,7 @@
 #-*-coding: utf-8 -*- 
 
-import requests
-import unittest
+import $(URL_PYTHON)/requests
+import $(URL_PYTHON)/unittest
 
 class GetEventListTest(unittest.TestCase):
     '''查询发布会接口'''
