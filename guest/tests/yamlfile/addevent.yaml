@@ -1,0 +1,11 @@
+url:http://127.0.0.1:8000/api/add_event/
+detail:新增event
+method:post
+params
+  eid:10
+  name:pytest-test3
+  status:1
+  limit:20
+  address:'地点'
+  start_time:'2020-11-13 10:00:00'
+
